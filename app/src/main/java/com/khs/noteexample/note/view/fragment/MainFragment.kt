@@ -60,6 +60,7 @@ class MainFragment:Fragment(){
         recyclerview.setHasFixedSize(true)
         itemTouchHelper = ItemTouchHelper(NoteItemTouchHandlers(viewModel,adapter))
         itemTouchHelper.attachToRecyclerView(recyclerview)
+
     }
 
     private fun observeViewModel() {
