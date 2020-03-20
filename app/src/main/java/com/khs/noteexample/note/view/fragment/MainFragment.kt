@@ -65,7 +65,6 @@ class MainFragment:Fragment(){
     private fun observeViewModel() {
         viewModel.getItem().observe(this, Observer {list->
             Log.d("DEBUG","BEFORE: "+ adapter.itemCount.toString())
-            recyclerview.adapter = adapter
             adapter?.submitList(list)
             Log.d("DEBUG","AFTER: "+ adapter.itemCount.toString())
         })
