@@ -10,7 +10,7 @@
             type="com.khs.noteexample.note.viewmodel.MainViewModel" />
         <variable
             name="handlers"
-            type="com.khs.noteexample.note.handlers.MainHandlers" />
+            type="com.khs.noteexample.note.view.handlers.MainHandlers" />
     </data>
 
     <RelativeLayout
@@ -42,24 +42,13 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="30dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/note_recyclerview"
+            android:layout_marginTop="35dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:fillViewport="true">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/note_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/item_note">
-                </androidx.recyclerview.widget.RecyclerView>
-            </ScrollView>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_note">
+        </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_write"
@@ -73,7 +62,6 @@
             app:elevation="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     </RelativeLayout>
 
 </layout>

@@ -47,7 +47,7 @@ class NoteRepository(application: Application): BaseRepository {
 
     }
 
-    override fun getAll(): LiveData<MutableList<NoteModel>> {
+    override fun getAll(): LiveData<List<NoteModel>> {
         val localList:LiveData<List<NoteEntity>> = noteDao.getAll()
         val reposList = toLiveDataListModel(localList)
         return reposList

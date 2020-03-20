@@ -18,8 +18,7 @@ abstract class NoteDatabase:RoomDatabase(){
     companion object{
         @Volatile private var instance: NoteDatabase?=null
         fun getInstance(context: Context): NoteDatabase?{
-            instance
-                ?: synchronized(NoteDatabase::class){
+            instance ?: synchronized(NoteDatabase::class){
                 instance = Room.databaseBuilder(context,
                     NoteDatabase::class.java,
                     "NOTE_DATABASE").fallbackToDestructiveMigration()

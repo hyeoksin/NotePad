@@ -6,39 +6,55 @@ import android.os.Parcelable
 data class NoteModel(
     var id: Int? = null,
     var title: String? = null,
-    var content: String? = null
+    var content: String? = null,
+    var createTime:String?=null,
+    var updateTime:String?=null
 ) : Parcelable {
 
-    constructor(title: String, content: String) : this() {
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ) {}
+
+    // 아이디가 없을 경우
+    constructor(title: String, content: String,createTime: String,updateTime: String) : this() {
         this.title = title
         this.content = content
+        this.createTime = createTime
+        this.updateTime = updateTime
     }
 
-    constructor(id:Int,title:String,content:String):this(){
+    // 아이디가 있을 경우
+    constructor(id:Int,title:String,content:String,updateTime:String):this(){
         this.id = id
         this.title = title
         this.content = content
+        this.updateTime = updateTime
     }
 
-    constructor(source: Parcel) : this(
-        source.readValue(Int::class.java.classLoader) as Int?,
-        source.readString(),
-        source.readString()
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeValue(id)
-        writeString(title)
-        writeString(content)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeString(title)
+        parcel.writeString(content)
+        parcel.writeString(createTime)
+        parcel.writeString(updateTime)
     }
 
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<NoteModel> = object : Parcelable.Creator<NoteModel> {
-            override fun createFromParcel(source: Parcel): NoteModel = NoteModel(source)
-            override fun newArray(size: Int): Array<NoteModel?> = arrayOfNulls(size)
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<NoteModel> {
+        override fun createFromParcel(parcel: Parcel): NoteModel {
+            return NoteModel(parcel)
+        }
+
+        override fun newArray(size: Int): Array<NoteModel?> {
+            return arrayOfNulls(size)
         }
     }
+
 }

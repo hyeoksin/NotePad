@@ -8,5 +8,5 @@ interface BaseRepository{
     fun update(noteModel: NoteModel)
     fun delete(noteModel: NoteModel)
     fun deleteAll()
-    fun getAll():LiveData<MutableList<NoteModel>>
+    fun getAll():LiveData<List<NoteModel>>
 }

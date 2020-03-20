@@ -10,7 +10,7 @@
             type="com.khs.noteexample.model.NoteModel" />
         <variable
             name="handlers"
-            type="com.khs.noteexample.note.handlers.NoteRecyclerViewHandlers" />
+            type="com.khs.noteexample.note.view.handlers.NoteRecyclerViewHandlers" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -19,7 +19,7 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@color/colorGray"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:id="@+id/item_note_rootview"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/item_image"
@@ -89,6 +89,7 @@
                             android:layout_height="wrap_content"/>
                         <TextView
                             android:id="@+id/item_add_timestamp"
+                            android:text="@={note.createTime}"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"
                             android:maxLines="1"
@@ -112,6 +113,7 @@
                             android:layout_height="wrap_content"/>
                         <TextView
                             android:id="@+id/item_add_update"
+                            android:text="@={note.updateTime}"
                             android:textColor="@color/colorWhite"
                             android:textStyle="bold"
                             android:maxLines="1"

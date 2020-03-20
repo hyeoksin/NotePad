@@ -1,6 +1,7 @@
 package com.khs.noteexample.note.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -9,12 +10,12 @@ import com.khs.noteexample.R
 import com.khs.noteexample.databinding.UpdateBinder
 import com.khs.noteexample.model.NoteModel
 import com.khs.noteexample.note.view.NoteActivity
-import com.khs.noteexample.note.viewmodel.UpdateViewModel
+import com.khs.noteexample.note.viewmodel.MainViewModel
 
 class UpdateFragment:Fragment(){
 
     private lateinit var binding:UpdateBinder
-    private lateinit var viewModel: UpdateViewModel
+    private lateinit var viewModel: MainViewModel
     private lateinit var note:NoteModel
 
     private val STATUS_MODIFY = "MODIFY"
@@ -33,7 +34,7 @@ class UpdateFragment:Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_update,container,false)
         binding.note = note
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProviders.of(activity!!).get(UpdateViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         CURRENT_STATUS = STATUS_READ
         setHasOptionsMenu(true)
         return binding.root
@@ -50,7 +51,7 @@ class UpdateFragment:Fragment(){
                 setupLayout(item)
             }
             R.id.menu_delete->{
-                viewModel.deleteItem(note)
+                viewModel.delete(note)
                 popBackStack()
             }
         }
@@ -71,12 +72,17 @@ class UpdateFragment:Fragment(){
                 item.setIcon(R.drawable.icons_edit_file_50px)
                 binding.editTitle.isEnabled = false
                 binding.editContent.isEnabled = false
-                this.note.title = binding.editTitle.text.toString()
-                this.note.content = binding.editContent.text.toString()
-                viewModel.updateItem(note)
-                popBackStack()
+                updateItem()
             }
         }
+    }
+
+    private fun updateItem() {
+        this.note.title = binding.editTitle.text.toString()
+        this.note.content = binding.editContent.text.toString()
+        this.note.updateTime = System.currentTimeMillis().toString()
+        viewModel.updateItem(note)
+        popBackStack()
     }
 
     private fun popBackStack(){

@@ -1,11 +1,12 @@
 package com.khs.noteexample.note.room
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
 interface NoteDao{
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(noteEntity: NoteEntity)
 
     @Update
@@ -17,6 +18,6 @@ interface NoteDao{
     @Query("DELETE FROM note_table")
     fun deleteAll()
 
-    @Query("SELECT * FROM note_table")
-    fun getAll():LiveData<List<NoteEntity>>
+    @Query("SELECT * FROM note_table ORDER BY note_update_time DESC")
+    fun getAll(): MutableLiveData<List<NoteEntity>>
 }

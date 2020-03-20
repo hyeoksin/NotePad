@@ -11,5 +11,7 @@ class NoteVIewHolder: BaseViewHolder {
 
     constructor(context: Context,noteBinder:NoteBinder):super(context,noteBinder.root)
 
-    override fun bindDataToVIewHolder(item: NoteModel?, position: Int) {}
+    override fun bindDataToVIewHolder(item: NoteModel?, position: Int) {
+
+    }
 }

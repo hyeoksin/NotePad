@@ -5,7 +5,7 @@
     <data class="WriteBinder">
         <variable
             name="handlers"
-            type="com.khs.noteexample.note.handlers.WriteHandlers" />
+            type="com.khs.noteexample.note.view.handlers.WriteHandlers" />
     </data>
 
     <ScrollView
@@ -75,12 +75,12 @@
                 android:layout_below="@+id/content_root_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <androidx.recyclerview.widget.RecyclerView
+<!--                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/image_recyclerview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3">
-                </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>-->
                 <TextView
                     android:id="@+id/btn_plus"
                     android:layout_gravity="center"

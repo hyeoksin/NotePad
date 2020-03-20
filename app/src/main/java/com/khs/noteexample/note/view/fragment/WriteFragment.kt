@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.khs.noteexample.R
 import com.khs.noteexample.databinding.WriteBinder
-import com.khs.noteexample.note.handlers.WriteHandlers
-import com.khs.noteexample.note.viewmodel.WriteViewModel
+import com.khs.noteexample.note.view.handlers.WriteHandlers
+import com.khs.noteexample.note.viewmodel.MainViewModel
 
 class WriteFragment:Fragment(){
 
     private lateinit var binding:WriteBinder
-    private lateinit var viewModel:WriteViewModel
+    private lateinit var viewModel:MainViewModel
 
     companion object{
         private var instance:WriteFragment?=null
@@ -27,8 +27,8 @@ class WriteFragment:Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_write,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProviders.of(activity!!).get(WriteViewModel::class.java)
-        binding.handlers = WriteHandlers(context!!,binding,viewModel)
+        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        binding.handlers = WriteHandlers(context!!, binding, viewModel)
         return binding.root
     }
 }
