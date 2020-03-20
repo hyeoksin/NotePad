@@ -64,9 +64,7 @@ class MainFragment:Fragment(){
 
     private fun observeViewModel() {
         viewModel.getItem().observe(this, Observer {list->
-            Log.d("DEBUG","BEFORE: "+ adapter.itemCount.toString())
             adapter?.submitList(list)
-            Log.d("DEBUG","AFTER: "+ adapter.itemCount.toString())
         })
     }
 
