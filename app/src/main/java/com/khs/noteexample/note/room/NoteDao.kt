@@ -19,5 +19,5 @@ interface NoteDao{
     fun deleteAll()
 
     @Query("SELECT * FROM note_table ORDER BY note_update_time DESC")
-    fun getAll(): MutableLiveData<List<NoteEntity>>
+    fun getAll(): LiveData<List<NoteEntity>>
 }
