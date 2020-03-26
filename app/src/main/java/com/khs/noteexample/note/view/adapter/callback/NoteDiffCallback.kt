@@ -12,7 +12,7 @@ class NoteDiffCallback: DiffUtil.ItemCallback<NoteModel>() {
     }
 
     override fun areContentsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
-        return oldItem.content.equals(newItem.content)
+        return oldItem.updateTime.equals(newItem.updateTime)
     }
 
 }

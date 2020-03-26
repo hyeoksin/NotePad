@@ -1,6 +1,7 @@
 package com.khs.noteexample.note.view.handlers
 
 import android.graphics.Color
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +25,10 @@ class NoteItemTouchHandlers(
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        viewModel.delete(adapter.getNoteAt(viewHolder.adapterPosition))
+        val position = viewHolder.adapterPosition
+        if(position!=RecyclerView.NO_POSITION){
+            viewModel.delete(adapter.getNoteAt(position))
+        }
     }
 
     override fun isLongPressDragEnabled(): Boolean {
@@ -42,11 +46,10 @@ class NoteItemTouchHandlers(
         }
     }
 
-/*
+
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
-        viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(viewHolder.itemView.context, R.color.colorYellow))
     }
-*/
+
 
 }

@@ -1,7 +1,6 @@
 package com.khs.noteexample.note.view.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -12,7 +11,6 @@ import com.khs.noteexample.model.NoteModel
 import com.khs.noteexample.note.view.handlers.NoteRecyclerViewHandlers
 import com.khs.noteexample.note.view.adapter.callback.NoteDiffCallback
 import com.khs.noteexample.note.view.holder.NoteVIewHolder
-
 
 
 class NoteAdapter(
@@ -32,10 +30,12 @@ class NoteAdapter(
     }
 
     override fun onBindViewHolder(holder: NoteVIewHolder, position: Int) {
-        val note = getItem(position)
-        noteBinder.note = note
-        noteBinder.handlers = NoteRecyclerViewHandlers(context, holder, this)
-        holder.bindDataToVIewHolder(note, position)
+        val note = getItem(holder.adapterPosition)
+        note?.let{
+            noteBinder.note = note
+            noteBinder.handlers = NoteRecyclerViewHandlers(context,note)
+            holder.bindDataToVIewHolder(note, position)
+        }
     }
 
     fun getNoteAt(position: Int): NoteModel {

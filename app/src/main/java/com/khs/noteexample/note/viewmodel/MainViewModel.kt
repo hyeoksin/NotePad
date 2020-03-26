@@ -27,9 +27,8 @@ class MainViewModel:AndroidViewModel{
         noteRepository.update(item)
     }
 
-    fun delete(note:NoteModel){
-        liveList = MutableLiveData()
-        noteRepository.delete(note)
+    fun delete(item:NoteModel){
+        noteRepository.delete(item)
     }
 
     fun getItem():LiveData<List<NoteModel>>{

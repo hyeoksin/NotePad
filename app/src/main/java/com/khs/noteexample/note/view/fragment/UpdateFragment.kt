@@ -33,7 +33,7 @@ class UpdateFragment:Fragment(){
         note = arguments?.getParcelable("note")!!
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_update,container,false)
         binding.note = note
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         CURRENT_STATUS = STATUS_READ
         setHasOptionsMenu(true)
@@ -82,6 +82,7 @@ class UpdateFragment:Fragment(){
         this.note.content = binding.editContent.text.toString()
         this.note.updateTime = System.currentTimeMillis().toString()
         viewModel.updateItem(note)
+        MainFragment.newInstance().recyclerViewClear()
         popBackStack()
     }
 

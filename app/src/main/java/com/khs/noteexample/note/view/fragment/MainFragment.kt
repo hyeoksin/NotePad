@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.khs.noteexample.R
 import com.khs.noteexample.databinding.MainBinder
 import com.khs.noteexample.model.NoteModel
@@ -27,7 +28,7 @@ class MainFragment:Fragment(){
 
     private lateinit var binding:MainBinder
     private lateinit var viewModel: MainViewModel
-    private lateinit var recyclerview:RecyclerView
+    private lateinit var recyclerView:RecyclerView
     private lateinit var adapter:NoteAdapter
     private lateinit var itemTouchHelper: ItemTouchHelper
 
@@ -39,8 +40,9 @@ class MainFragment:Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        instance = this
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main,container,false)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
         binding.handlers = MainHandlers(context!!)
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         setRecyclerView()
@@ -54,20 +56,24 @@ class MainFragment:Fragment(){
 
     private fun setRecyclerView() {
         adapter = NoteAdapter(context!!)
-        recyclerview = binding.noteRecyclerview
-        recyclerview.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-        recyclerview.adapter = adapter
-        recyclerview.setHasFixedSize(true)
+        recyclerView = binding.noteRecyclerview
+        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+        recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
         itemTouchHelper = ItemTouchHelper(NoteItemTouchHandlers(viewModel,adapter))
-        itemTouchHelper.attachToRecyclerView(recyclerview)
-
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun observeViewModel() {
         viewModel.getItem().observe(this, Observer {list->
+            recyclerView.recycledViewPool.clear()
             adapter?.submitList(list)
         })
     }
 
+    fun recyclerViewClear(){
+        recyclerView.removeAllViews()         // 업데이트 깜빡임 해결
+        recyclerView.recycledViewPool.clear()
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.khs.noteexample.note.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.khs.noteexample.model.NoteModel
 import com.khs.noteexample.note.room.NoteEntity
@@ -18,7 +19,7 @@ fun NoteRepository.toListModel(noteEntity:List<NoteEntity>):List<NoteModel>{
     return itemList
 }
 
-fun NoteRepository.toLiveDataListModel(localList:LiveData<List<NoteEntity>>):LiveData<List<NoteModel>>{
+fun NoteRepository.toLiveDataListModel(localList:LiveData<List<NoteEntity>>):LiveData<List<NoteModel>> {
     return Transformations.map<List<NoteEntity>, List<NoteModel>>(localList,::toListModel)
 }
 

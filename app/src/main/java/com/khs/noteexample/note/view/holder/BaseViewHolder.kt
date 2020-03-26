@@ -14,4 +14,5 @@ abstract class BaseViewHolder : RecyclerView.ViewHolder{
     }
 
     abstract fun bindDataToVIewHolder(item: NoteModel?, position:Int)
+
 }

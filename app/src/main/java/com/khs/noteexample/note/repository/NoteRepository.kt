@@ -3,6 +3,7 @@ package com.khs.noteexample.note.repository
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.khs.noteexample.model.NoteModel
 import com.khs.noteexample.note.room.NoteDao
 import com.khs.noteexample.note.room.NoteDatabase
@@ -15,8 +16,7 @@ class NoteRepository(application: Application): BaseRepository {
     companion object{
         @Volatile private var instance: NoteRepository?=null
         fun getInstance(application: Application): NoteRepository {
-            return instance
-                ?: NoteRepository(application)
+            return instance ?: NoteRepository(application)
         }
     }
 
@@ -48,7 +48,7 @@ class NoteRepository(application: Application): BaseRepository {
     }
 
     override fun getAll(): LiveData<List<NoteModel>> {
-        val localList:LiveData<List<NoteEntity>> = noteDao.getAll()
+        val localList: LiveData<List<NoteEntity>> = noteDao.getAll()
         val reposList = toLiveDataListModel(localList)
         return reposList
     }
