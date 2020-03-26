@@ -75,5 +75,4 @@ class MainFragment:Fragment(){
         recyclerView.removeAllViews()         // 업데이트 깜빡임 해결
         recyclerView.recycledViewPool.clear()
     }
-
 }
